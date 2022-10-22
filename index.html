@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Online</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    
+    <style>
+        .container{
+            background-color: rgb(184, 180, 185);
+            color: black;
+            /* margin: 100px; */
+            height: 1300px;
+            border-radius: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+           
+            
+            /* box-shadow: 10px;
+            box-shadow: black; */
+        }
+        #submit{
+            width: 550px;
+           margin-left: 300px;
+           margin-left: 300px;
+           margin-top: 20px;
+        }
+        .heding{
+            text-align: center;
+            justify-content: center;
+            margin-top: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            
+            color: rgb(175, 106, 240);
+        }
+        body{
+           background-color: rgb(61, 51, 63);
+        }
+        
+    </style>
+    <script>
+        function OrderClick(){
+            document.getElementById("lblname").innerHTML = document.getElementById("cstname").value;
+            document.getElementById("lblckin").innerHTML = document.getElementById("ckdt").value;
+            document.getElementById("lblndys").innerHTML = document.getElementById("nd").value;
+            document.getElementById("lblnp").innerHTML = document.getElementById("np").value;
+            
+
+            var roomName = "";
+            var roomCost = 0;
+            var Comforts = "";
+            var ComfortsCost = 0;
+           
+          
+
+
+            dulexradio = document.getElementById("dlxroom");
+            suitradio = document.getElementById("stroom");
+            // alert("roomcoast is " + dulexradio)
+            if(dulexradio.checked){
+                roomName = dulexradio.value;
+                roomCost = 2500;
+                alert(dulexradio.checked);
+            }
+            if(suitradio.checked){
+                roomName = suitradio.value;
+                roomCost = 4000;
+            }
+
+            if(suitradio.checked == false && dulexradio.checked ==false){
+                
+                alert("Please select your room");
+            var isOk = false;
+                document.getElementById("modelid").style.visibility="hidden";
+
+            }
+            else
+            {
+                var isOk = true;
+                document.getElementById("modelid").style.visibility="visible";
+            }
+
+            
+
+
+
+            accheckbox = document.getElementById("acroom");
+            lockcheckbox = document.getElementById("lockroom");
+            if(accheckbox.checked){
+                Comforts += accheckbox.value + "<br>";
+                ComfortsCost = 1000;
+                roomCost = roomCost + ComfortsCost;
+            }
+            if(lockcheckbox.checked){
+                Comforts += lockcheckbox.value + "<br>";
+                ComfortsCost = 300;
+                roomCost = roomCost + ComfortsCost;
+            }
+             
+            
+
+            // for days n persons
+            var Days = document.getElementById("nd").value;
+            var Persons = document.getElementById("np").value;
+            if(Days >0){
+                roomCost = roomCost * Days;
+            }                       
+            if(Persons >2){
+                 Persons = Persons - 2;
+                var PSum = Persons *1000;
+                roomCost = roomCost+ PSum;
+
+            }
+
+            // for advance
+            var advance = document.getElementById("adamt").value;
+            roomCost =  roomCost - advance;
+            
+            
+            document.getElementById("lblroom").innerHTML = roomName;
+            document.getElementById("lblcomforts").innerHTML = Comforts;
+            document.getElementById("lbltotal").innerHTML = "&#8377;" + roomCost;
+
+        
+            
+        }
+       
+    </script>
+   
+</head>
+
+<body >
+    <h1 class="heding" >ROOM BOOKINGS</h1>
+   <div class="container border border-rounded ">
+    <!-- section1 -->
+    <div>
+        <h4 class="pt-4">CONTACT INFO</h4>
+        <dl class="row">
+            <dt class="col-3">Customer Name</dt>
+            <dd class="col-9 "><input type="text" id="cstname" class=" form-control"></dd>
+            <dt class="col-3">Check-in Date</dt>
+            <dd class="col-9"><input type="date" id="ckdt" min="2022-10-30" max="2023-03-30" class="form-control" ></dd>
+            <dt class="col-3">No.of Days</dt>
+            <dd class="col-9"><input type="number" id="nd" min="1" max="20" value="1" step="1"  class="form-control"  ></dd>
+            <dt class="col-3">No.of Persons</dt>
+            <dd class="col-9"><input type="number" id="np" min="1" max="5" step="1" value="1" class="form-control" ></dd>
+        </dl>
+    </div>
+    
+
+    <!-- section2 -->
+    <h4 class="pt-3">Select Room Type</h4>
+    <div class=" row d-flex justify-content-around text-align-center ">
+       
+        <div class="col">
+            <img src="../prjimages/Room_Deluxe_Room_.jpg" width="400px" height="200px">
+            <div class="card-header">
+                <h3>Deluxe Room</h3>
+            </div>
+            <div class="card-footer">
+                <h4><input type="radio" name="room" id="dlxroom" value="Deluxe Room" class="form-check-input">&#8377; 2500/-</h4>
+            </div>
+        </div>
+        <div class="col">
+            <img src="../prjimages/suiteroom2.jfif" width="400px"  height="200px">
+            <div class="card-header">
+                <h3>Suite Room</h3>
+            </div>
+            <div class="card-footer">
+                <h4><input type="radio" name="room" id="stroom" value="Suite Room" class="form-check-input">&#8377; 4000/-</h4>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- section3 -->
+    <h4 class="pt-4">Select Amenities</h4>
+    <div class="d-flex justify-content-around text-align-center row">
+        <div class="col">
+            <img src="../prjimages/ac.jfif" width="310px" height="210px">
+            <div class="card-header">
+                <h3>AC</h3>
+            </div>
+            <div class="card-footer">
+                <h4><input type="checkbox" id="acroom" value="AC" class="form-check-input">&#8377; 1000/-</h4>
+            </div>
+        </div>
+        <div class="col">
+            <img src="../prjimages/locker.jpg" width="210px" height="210px">
+            <div class="card-header">
+                <h3>Digital Lock</h3>
+            </div>
+            <div class="card-footer">
+                <h4><input type="checkbox" id="lockroom" value="Digital Lock" class="form-check-input">&#8377; 300/-</h4>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- section4 -->
+    <h4 class="pt-4">Advance Amount</h4>
+    <div>
+        <dt class="pb-3">Pay Advance Amount</dt>
+        <dd><input type="number" class="form-control" id="adamt" min="1000"  step="500" value="500"  ></dd>
+    </div>
+
+
+    <!-- section5 -->
+    <button class="btn btn-primary" data-bs-target="#bill" data-bs-toggle="modal" id="submit" onclick="OrderClick()">SUBMIT</button>
+    <!-- input to popup -->
+    
+
+    <div class="modal fade" id="bill" >
+        <div class="modal-dialog" id="modelid">
+            <div class="modal-content">
+                <div class="modal-header text-primary">
+                    <h2>Your Bill</h2>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-dark">
+                    <dl class="row">
+                        <dt class="col-4">Name of customer</dt>
+                        <dd class="col-8" id="lblname"></dd>
+                        <dt class="col-4">Check-in</dt>
+                        <dd class="col-8" id="lblckin"></dd>
+                        <dt class="col-4">N Days</dt>
+                        <dd class="col-8" id="lblndys"></dd>
+                        <dt class="col-4">N Persons</dt>
+                        <dd class="col-8" id="lblnp"></dd>
+                        <dt class="col-4">Room Type</dt>
+                        <dd class="col-8" id="lblroom"></dd>
+                        <dt class="col-4">Comforts</dt>
+                        <dd class="col-8" id="lblcomforts"></dd>
+                        <dt class="col-4">Amount You Paid</dt>
+                        <dd class="col-8" id="lblamtpaid"></dd>
+                        <!-- <dt class="col-4">Extra Amount</dt>
+                        <dd class="col-8" id="lblextamt"></dd>  thsi has to display only when there is extra person added-->
+                        <dt class="col-4">Total</dt>
+                        <dd class="col-8" id="lbltotal"></dd>
+                        
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button data-bs-dismiss="modal" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+   </div>
+
+
+    <!-- <script src="../../node_modules/jquery/dist/jquery.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
